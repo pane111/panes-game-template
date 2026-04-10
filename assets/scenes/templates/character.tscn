@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cc6tyas273oia"]
+
+[ext_resource type="Script" uid="uid://k0e85uar668u" path="res://character.gd" id="1_b78b0"]
+[ext_resource type="Texture2D" uid="uid://yfuitudrnlop" path="res://assets/sprites/placeholder/npc_template.png" id="2_2dmqv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bh6m"]
+atlas = ExtResource("2_2dmqv")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xerjo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bh6m")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n578j"]
+height = 38.0
+
+[node name="Character" type="CharacterBody2D" unique_id=109607271 node_paths=PackedStringArray("anim")]
+motion_mode = 1
+script = ExtResource("1_b78b0")
+anim = NodePath("CSprite")
+
+[node name="CSprite" type="AnimatedSprite2D" parent="." unique_id=2076724140]
+sprite_frames = SubResource("SpriteFrames_xerjo")
+animation = &"idle_down"
+autoplay = "idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1558998834]
+shape = SubResource("CapsuleShape2D_n578j")

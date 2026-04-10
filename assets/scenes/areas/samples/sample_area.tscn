@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://hjmmpw48omox"]
+
+[ext_resource type="Script" uid="uid://bkjs4l88f55b3" path="res://assets/scenes/areas/samples/sample_area.gd" id="1_44x20"]
+
+[node name="SampleArea" type="Node2D" unique_id=1103649657]
+script = ExtResource("1_44x20")
+area_name = "Sample Area"
