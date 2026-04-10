@@ -1,73 +1,72 @@
-[gd_scene format=3 uid="uid://bdwxh5lad6at2"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dnabupocto0bw"]
 
-[ext_resource type="Script" uid="uid://cnfxxcrmvhma2" path="res://assets/scenes/templates/player.gd" id="1_pp8k8"]
-[ext_resource type="Texture2D" uid="uid://yfuitudrnlop" path="res://assets/sprites/placeholder/npc_template.png" id="2_y5bjp"]
+[ext_resource type="Texture2D" uid="uid://yfuitudrnlop" path="res://assets/sprites/placeholder/npc_template.png" id="1_62ymw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8bh6m"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(32, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pp8k8"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(32, 96, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5bjp"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(32, 144, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dklma"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(32, 48, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7byp2"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(0, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vxr81"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(32, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vh1bq"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(64, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpyqt"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(0, 96, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8gf0"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(32, 96, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1jl0t"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(64, 96, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aavto"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(0, 144, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c2yk4"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(32, 144, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qrn43"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(64, 144, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fw1e5"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(0, 48, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2617"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(32, 48, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wr56q"]
-atlas = ExtResource("2_y5bjp")
+atlas = ExtResource("1_62ymw")
 region = Rect2(64, 48, 32, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_pp8k8"]
+[resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -169,28 +168,3 @@ animations = [{
 "name": &"move_up",
 "speed": 8.0
 }]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp8k8"]
-
-[node name="Player" type="CharacterBody2D" unique_id=1861052517 node_paths=PackedStringArray("anim")]
-y_sort_enabled = true
-collision_mask = 137
-motion_mode = 1
-script = ExtResource("1_pp8k8")
-max_cam_offset = 32.0
-anim = NodePath("CSprite")
-metadata/_edit_group_ = true
-
-[node name="CSprite" type="AnimatedSprite2D" parent="." unique_id=1330160743]
-sprite_frames = SubResource("SpriteFrames_pp8k8")
-animation = &"move_up"
-autoplay = "idle_down"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2104374032]
-shape = SubResource("CapsuleShape2D_pp8k8")
-
-[node name="CameraPivot" type="Node2D" parent="." unique_id=1297058176]
-
-[node name="InteractionCast" type="RayCast2D" parent="." unique_id=1991045129]
-target_position = Vector2(0, 32)
-collision_mask = 8

@@ -2,6 +2,24 @@ extends Node
 
 var entities: Dictionary[String,Node]
 
+signal tween_complete
+func focus_cam_on_entity(e_name):
+	var target_entity = entities[e_name]
+	if target_entity == null: printerr("Entity"+ e_name + "does not exist!");return
+	GameManager.maincam.reparent(target_entity)
+	GameManager.maincam.position = Vector2.ZERO
+
+func move_cam_to_position(pos,dur):
+	GameManager.maincam.reparent(GameManager)
+	var t = get_tree().create_tween()
+	t.tween_property(GameManager.maincam,"global_position",pos,dur)
+	await t.finished
+	tween_complete.emit()
+
+
+func reset_cam():
+	GameManager.maincam.reparent(GameManager.player)
+	GameManager.maincam.position = Vector2.ZERO
 
 # Use this to register an entity to the dictionary
 func register_entity(e_name,obj):

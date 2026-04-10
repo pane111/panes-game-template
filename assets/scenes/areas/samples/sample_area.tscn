@@ -1,7 +1,27 @@
 [gd_scene format=3 uid="uid://hjmmpw48omox"]
 
 [ext_resource type="Script" uid="uid://bkjs4l88f55b3" path="res://assets/scenes/areas/samples/sample_area.gd" id="1_44x20"]
+[ext_resource type="PackedScene" uid="uid://h4f1u21ppkdh" path="res://assets/scenes/templates/npc.tscn" id="2_o68h3"]
 
-[node name="SampleArea" type="Node2D" unique_id=1103649657]
+[node name="SampleArea" type="Node2D" unique_id=1103649657 node_paths=PackedStringArray("doors")]
+y_sort_enabled = true
 script = ExtResource("1_44x20")
 area_name = "Sample Area"
+doors = {
+"default": NodePath("DefaultEntry")
+}
+default_door = "default"
+
+[node name="DefaultEntry" type="Node2D" parent="." unique_id=1872358645]
+position = Vector2(96, 71)
+
+[node name="NPC" parent="." unique_id=109607271 instance=ExtResource("2_o68h3")]
+y_sort_enabled = true
+position = Vector2(215, 90)
+dialogue_start = "moving_character"
+
+[node name="NPC2" parent="." unique_id=1045956191 instance=ExtResource("2_o68h3")]
+y_sort_enabled = true
+position = Vector2(74, 161)
+dialogue_start = "still_character"
+can_move = false

@@ -15,6 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Pane's Game Template"
+run/main_scene="uid://csqyyca6875fq"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -29,6 +30,7 @@ FlagManager="*uid://7eur0ooeorwt"
 CharacterDatabase="*uid://35gtow4ol6g6"
 CutsceneManager="*uid://dfxcpp607o4g4"
 EffectManager="*uid://conpnhpvwrt22"
+HudManager="*uid://frbal7ust43y"
 
 [display]
 
@@ -37,6 +39,10 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/character_creator/plugin.cfg")
+
+[global_group]
+
+interactable=""
 
 [input]
 

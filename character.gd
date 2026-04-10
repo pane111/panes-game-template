@@ -6,18 +6,21 @@ extends CharacterBody2D
 @export var move_speed = 140.0
 @export var anim: AnimatedSprite2D
 @export var moving=false
+@export var can_move=true
 signal move_completed
 func _physics_process(_delta: float) -> void:
-	if moving:
+	if moving && can_move:
 		move_and_slide()
 
 #Move character for a specific amount of time in a direction
 func move_char(dir,duration,speed_mult=1.0):
+	if !can_move: return
 	var t = get_tree().create_timer(duration)
 	velocity = dir.normalized() * move_speed * speed_mult
 	moving=true
 	animate(velocity,true,true)
 	await t.timeout
+	if !can_move: return
 	velocity = Vector2.ZERO
 	animate(dir,false,true)
 	moving = false

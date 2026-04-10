@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://h4f1u21ppkdh"]
+
+[ext_resource type="Script" uid="uid://b7w13ywip5rpq" path="res://assets/scenes/templates/npc.gd" id="1_s1pdp"]
+[ext_resource type="SpriteFrames" uid="uid://dnabupocto0bw" path="res://assets/resources/spriteframes/example_sprite_frames.tres" id="2_s1pdp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s1pdp"]
+
+[node name="NPC" type="CharacterBody2D" unique_id=109607271 node_paths=PackedStringArray("anim") groups=["interactable"]]
+collision_layer = 8
+collision_mask = 137
+motion_mode = 1
+script = ExtResource("1_s1pdp")
+anim = NodePath("CSprite")
+
+[node name="CSprite" type="AnimatedSprite2D" parent="." unique_id=2076724140]
+sprite_frames = ExtResource("2_s1pdp")
+animation = &"idle_down"
+autoplay = "idle_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1558998834]
+shape = SubResource("CapsuleShape2D_s1pdp")
+
+[node name="RandomMoveTimer" type="Timer" parent="." unique_id=511630973]
+
+[connection signal="timeout" from="RandomMoveTimer" to="." method="_on_random_move_timer_timeout"]

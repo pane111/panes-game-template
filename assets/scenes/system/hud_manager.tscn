@@ -1,0 +1,210 @@
+[gd_scene format=3 uid="uid://frbal7ust43y"]
+
+[ext_resource type="Script" uid="uid://q3juos8gmc5w" path="res://assets/scenes/system/hud_manager.gd" id="1_jo5aa"]
+[ext_resource type="Script" uid="uid://0dwelbdhueoa" path="res://assets/scenes/system/vol_slider.gd" id="2_aputa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jo5aa"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_aputa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackOverlay:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xd8oc"]
+resource_name = "fade_black_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackOverlay:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c7f67"]
+resource_name = "fade_to_black"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackOverlay:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_byvy3"]
+_data = {
+&"RESET": SubResource("Animation_aputa"),
+&"fade_black_out": SubResource("Animation_xd8oc"),
+&"fade_to_black": SubResource("Animation_c7f67")
+}
+
+[node name="HUDManager" type="Node" unique_id=726277265]
+script = ExtResource("1_jo5aa")
+fade_from_black_at_launch = true
+
+[node name="Overlays" type="CanvasLayer" parent="." unique_id=366733486]
+layer = 5
+
+[node name="BlackOverlay" type="Panel" parent="Overlays" unique_id=1468911948]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jo5aa")
+metadata/_edit_use_anchors_ = true
+
+[node name="FadeBlackAnim" type="AnimationPlayer" parent="Overlays" unique_id=1554949782]
+libraries/ = SubResource("AnimationLibrary_byvy3")
+
+[node name="PopupMenus" type="CanvasLayer" parent="." unique_id=1033462957]
+layer = 4
+
+[node name="SettingsMenu" type="Panel" parent="PopupMenus" unique_id=2081625694]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="PopupMenus/SettingsMenu" unique_id=1555542486]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 82.0
+offset_bottom = 33.0
+text = "Settings"
+
+[node name="Sliders" type="VBoxContainer" parent="PopupMenus/SettingsMenu" unique_id=1520710668]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Slider" type="MarginContainer" parent="PopupMenus/SettingsMenu/Sliders" unique_id=619990765 node_paths=PackedStringArray("lb", "slider")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+script = ExtResource("2_aputa")
+lb = NodePath("HBoxContainer/MasterLabel")
+slider = NodePath("HBoxContainer/MasterSlider")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupMenus/SettingsMenu/Sliders/Slider" unique_id=352296833]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="MasterLabel" type="Label" parent="PopupMenus/SettingsMenu/Sliders/Slider/HBoxContainer" unique_id=937653555]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Master Volume 100%"
+vertical_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="PopupMenus/SettingsMenu/Sliders/Slider/HBoxContainer" unique_id=1848050330]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+rounded = true
+
+[node name="Slider2" type="MarginContainer" parent="PopupMenus/SettingsMenu/Sliders" unique_id=1171869353 node_paths=PackedStringArray("lb", "slider")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+script = ExtResource("2_aputa")
+lb = NodePath("HBoxContainer/MusicLabel")
+slider = NodePath("HBoxContainer/MusicSlider")
+default_label = "Music Volume"
+bus = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupMenus/SettingsMenu/Sliders/Slider2" unique_id=1420552614]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="MusicLabel" type="Label" parent="PopupMenus/SettingsMenu/Sliders/Slider2/HBoxContainer" unique_id=1634660745]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Music Volume 100%"
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="PopupMenus/SettingsMenu/Sliders/Slider2/HBoxContainer" unique_id=1133075274]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+rounded = true
+
+[node name="Slider3" type="MarginContainer" parent="PopupMenus/SettingsMenu/Sliders" unique_id=952998783 node_paths=PackedStringArray("lb", "slider")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+script = ExtResource("2_aputa")
+lb = NodePath("HBoxContainer/SFXLabel")
+slider = NodePath("HBoxContainer/SFXSlider")
+default_label = "SFX Volume"
+bus = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupMenus/SettingsMenu/Sliders/Slider3" unique_id=1708490481]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="SFXLabel" type="Label" parent="PopupMenus/SettingsMenu/Sliders/Slider3/HBoxContainer" unique_id=1229420943]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "SFX Volume 100%"
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="PopupMenus/SettingsMenu/Sliders/Slider3/HBoxContainer" unique_id=230468293]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+rounded = true
+
+[node name="CloseSettings" type="Button" parent="PopupMenus/SettingsMenu" unique_id=932754937]
+layout_mode = 0
+offset_left = 1020.0
+offset_top = 592.0
+offset_right = 1118.0
+offset_bottom = 623.0
+text = "Save & Close"
+
+[node name="MainHUD" type="CanvasLayer" parent="." unique_id=1779766172]
+
+[connection signal="value_changed" from="PopupMenus/SettingsMenu/Sliders/Slider/HBoxContainer/MasterSlider" to="PopupMenus/SettingsMenu/Sliders/Slider" method="_on_slider_value_changed"]
+[connection signal="value_changed" from="PopupMenus/SettingsMenu/Sliders/Slider2/HBoxContainer/MusicSlider" to="PopupMenus/SettingsMenu/Sliders/Slider2" method="_on_slider_value_changed"]
+[connection signal="value_changed" from="PopupMenus/SettingsMenu/Sliders/Slider3/HBoxContainer/SFXSlider" to="PopupMenus/SettingsMenu/Sliders/Slider3" method="_on_slider_value_changed"]
+[connection signal="pressed" from="PopupMenus/SettingsMenu/CloseSettings" to="." method="_on_close_settings_pressed"]

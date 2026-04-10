@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://csqyyca6875fq"]
+
+[ext_resource type="Script" uid="uid://c3aavisk576al" path="res://assets/scenes/system/title_screen.gd" id="1_bivv5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rs7a"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="TitleScreen" type="Node" unique_id=2143059936]
+script = ExtResource("1_bivv5")
+starter_scene = "uid://hjmmpw48omox"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1909536281]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1562855596]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8rs7a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel" unique_id=899985788]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.5
+offset_top = -33.5
+offset_right = 143.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel/VBoxContainer" unique_id=1594916316]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[wave]Pane11's Game Template!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="PlayBtn" type="Button" parent="CanvasLayer/Panel/VBoxContainer" unique_id=91843066]
+layout_mode = 2
+text = "Start Game"
+
+[node name="SettingsBtn" type="Button" parent="CanvasLayer/Panel/VBoxContainer" unique_id=1176011271]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitBtn" type="Button" parent="CanvasLayer/Panel/VBoxContainer" unique_id=87936730]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/PlayBtn" to="." method="_on_play_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
