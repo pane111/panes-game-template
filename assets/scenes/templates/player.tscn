@@ -177,6 +177,7 @@ y_sort_enabled = true
 collision_mask = 137
 motion_mode = 1
 script = ExtResource("1_pp8k8")
+sprint_enabled = false
 max_cam_offset = 32.0
 anim = NodePath("CSprite")
 metadata/_edit_group_ = true

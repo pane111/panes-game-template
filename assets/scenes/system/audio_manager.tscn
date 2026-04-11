@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c8m70ejvv2mx6"]
+
+[ext_resource type="Script" uid="uid://c4vrjmj4r7j4r" path="res://assets/scenes/system/audio_manager.gd" id="1_eleqn"]
+
+[node name="AudioManager" type="Node" unique_id=2050948673]
+script = ExtResource("1_eleqn")
+
+[node name="MusicLayer1" type="AudioStreamPlayer" parent="." unique_id=725438879]
+autoplay = true
+bus = &"Music"
+
+[node name="MusicLayer2" type="AudioStreamPlayer" parent="." unique_id=552263599]
+autoplay = true
+bus = &"Music"
+
+[node name="HudSFX" type="AudioStreamPlayer" parent="." unique_id=1337659335]
+bus = &"SFX"
+
+[node name="AtmoPlayer" type="AudioStreamPlayer" parent="." unique_id=758581207]
+bus = &"Atmo"
