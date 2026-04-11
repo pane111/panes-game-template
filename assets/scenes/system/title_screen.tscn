@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://csqyyca6875fq"]
 
 [ext_resource type="Script" uid="uid://c3aavisk576al" path="res://assets/scenes/system/title_screen.gd" id="1_bivv5"]
+[ext_resource type="AudioStream" uid="uid://jerc7x35kqiu" path="res://assets/audio/music/MyCoolSong.ogg" id="2_8rs7a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rs7a"]
 bg_color = Color(0, 0, 0, 1)
@@ -8,6 +9,7 @@ bg_color = Color(0, 0, 0, 1)
 [node name="TitleScreen" type="Node" unique_id=2143059936]
 script = ExtResource("1_bivv5")
 starter_scene = "uid://hjmmpw48omox"
+title_music = ExtResource("2_8rs7a")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1909536281]
 

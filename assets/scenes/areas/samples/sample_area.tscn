@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://hjmmpw48omox"]
 
-[ext_resource type="Script" uid="uid://bkjs4l88f55b3" path="res://assets/scenes/areas/samples/sample_area.gd" id="1_44x20"]
+[ext_resource type="Script" uid="uid://bkjs4l88f55b3" path="res://assets/scenes/areas/samples/area.gd" id="1_44x20"]
 [ext_resource type="PackedScene" uid="uid://h4f1u21ppkdh" path="res://assets/scenes/templates/npc.tscn" id="2_o68h3"]
+[ext_resource type="AudioStream" uid="uid://dd3x3x2m7prfk" path="res://assets/audio/music/city.ogg" id="2_t2liq"]
 
 [node name="SampleArea" type="Node2D" unique_id=1103649657 node_paths=PackedStringArray("doors")]
 y_sort_enabled = true
 script = ExtResource("1_44x20")
 area_name = "Sample Area"
+area_music = ExtResource("2_t2liq")
 doors = {
 "default": NodePath("DefaultEntry")
 }

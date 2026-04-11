@@ -2,14 +2,36 @@ extends Node
 
 @onready var layer1=$MusicLayer1
 @onready var layer2=$MusicLayer2
+@export var global_ui_accept_sound: AudioStream
+@export var global_ui_cancel_sound: AudioStream
+@export var global_ui_select_sound: AudioStream
 var c_layer #Current Layer
 var i_layer #Inactive Layer
 signal fade_complete
 
+func _ready() -> void:
+	c_layer=layer1
+	i_layer=layer2
+
+
 func set_music(l1,l2):
 	layer1.stream=l1
 	layer2.stream=l2
-	
+	layer1.play()
+	layer2.play()
+
+func play_song(song):
+	set_layer(true)
+	layer1.stream=song
+	layer1.play()
+	layer2.play()
+
+func play_global_accept():
+	play_hud_sfx(global_ui_accept_sound)
+func play_global_cancel():
+	play_hud_sfx(global_ui_cancel_sound)
+func play_global_select():
+	play_hud_sfx(global_ui_select_sound)
 func set_layer(val):
 	var stored_vol_1 = c_layer.volume_linear
 	var stored_vol_2 = i_layer.volume_linear
