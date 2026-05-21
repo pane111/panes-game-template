@@ -1,6 +1,5 @@
 extends "res://character.gd"
 
-var lastdir: Vector2
 @export var sprintspeed = 2.0
 @export var sprint_enabled=true #Disable this if you want no sprinting
 @onready var cam_pivot=$CameraPivot #The camera will follow this
@@ -18,9 +17,15 @@ func _set_input(val):
 	handle_input = val
 	input_enabled.emit()
 
+func set_collision(val):
+	print_debug("Setting player collision to " + str(val))
+	$CollisionShape2D.set_deferred("disabled",!val)
+
 func _ready() -> void:
 	_set_input(true)
 	lastdir = Vector2.DOWN
+	#DialogueManager.dialogue_started.connect(func(_info = null): set_collision(false))
+	#DialogueManager.dialogue_ended.connect(func(_info = null): set_collision(true))
 
 func _process(delta: float) -> void:
 	if velocity.length() > 0:
@@ -35,7 +40,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		speedmult = sprintspeed
 	else:
 		speedmult=1.0
-	
+	if lastdir == null: lastdir=Vector2.ZERO
 	velocity = inp.normalized() * move_speed * speedmult
 	icast.target_position = lastdir.normalized()*max_interaction_range
 	anim.speed_scale = speedmult
@@ -56,6 +61,7 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	if icast.is_colliding():
 		var col = icast.get_collider()
+		if col == null: return
 		if col.is_in_group("interactable"):
 			can_inter=true
 			cur_inter=col
@@ -63,4 +69,4 @@ func _physics_process(delta: float) -> void:
 			can_inter=false
 	else:
 		can_inter=false
-	global_position = global_position.clamp(Vector2.ZERO,Vector2(99999,99999))
+	#global_position = global_position.clamp(Vector2.ZERO,Vector2(99999,99999))

@@ -6,12 +6,15 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func check_flag(f,val):
-	if flags[f] == null:
-		return false
+	if !flag_exists(f):
+		set_flag(f,0)
 	if flags[f] == val:
 		return true
-	
-	return false
+	else:
+		return false
+
+func flag_exists(f):
+	return flags.has(f)
 
 func set_flag(f,val):
 	flags[f]=val

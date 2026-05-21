@@ -7,22 +7,58 @@ extends CharacterBody2D
 @export var anim: AnimatedSprite2D
 @export var moving=false
 @export var can_move=true
+signal jumped
 signal move_completed
+var lastdir = Vector2.ZERO
+
+@export var simplified_animation=false
+
 func _physics_process(_delta: float) -> void:
-	if moving && can_move:
+	if moving:
 		move_and_slide()
 
 #Move character for a specific amount of time in a direction
-func move_char(dir,duration,speed_mult=1.0):
-	if !can_move: return
+func move_char(dir,duration,speed_mult=1.0,forced=false):
+	if !forced:
+		if !can_move: return
 	var t = get_tree().create_timer(duration)
-	velocity = dir.normalized() * move_speed * speed_mult
 	moving=true
+	velocity = dir.normalized() * move_speed * speed_mult
 	animate(velocity,true,true)
 	await t.timeout
-	if !can_move: return
+	if !forced:
+		if !can_move: return
 	velocity = Vector2.ZERO
+	lastdir = dir
 	animate(dir,false,true)
+	moving = false
+	move_completed.emit()
+
+func look_in_direction(dir: Vector2):
+	animate(dir.normalized(),false,true)
+	lastdir=dir.normalized()
+
+func look_at_object(obj):
+	var o = CutsceneManager.entities[obj]
+	var dir = (o.global_position-global_position).normalized()
+	look_in_direction(dir)
+func look_at_position(pos):
+	var dir = (pos-global_position).normalized()
+	look_in_direction(dir)
+#Push character (can be used for knockback, dash, etc)
+func push_char(dir,duration,force,decaying=false,forced=false):
+	if !forced:
+		if !can_move: return
+	var t = get_tree().create_timer(duration)
+	moving=true
+	velocity = dir.normalized() * force
+	if decaying:
+		var tween = get_tree().create_tween()
+		tween.tween_property(self,"velocity",Vector2.ZERO,duration)
+	await t.timeout
+	if !forced:
+		if !can_move: return
+	velocity = Vector2.ZERO
 	moving = false
 	move_completed.emit()
 
@@ -35,19 +71,45 @@ func move_char_to_position(pos,speed_mult=1.0):
 	animate(dir.normalized(),true,true)
 	await t.finished
 	animate(dir.normalized(),false,true)
+	lastdir = dir
 	move_completed.emit()
 
 #Play specific animation
 func set_anim(a_name):
 	anim.play(a_name)
 
+
+func jump(dur=0.25,height=32.0):
+	var t = get_tree().create_tween()
+	t.tween_property(anim,"offset",Vector2(0,-height),dur/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await t.finished
+	t = get_tree().create_tween()
+	t.tween_property(anim,"offset",Vector2(0,0),dur/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await t.finished
+	jumped.emit()
+
 #Set movement/idle animation
 func animate(dir: Vector2, move = false, setanim = false):
+	
+	if simplified_animation:
+		var a_name="idle"
+		if move:
+			a_name="move"
+		if dir.x < 0:
+			anim.flip_h=true
+		elif dir.x > 0:
+			anim.flip_h=false
+		if setanim:
+			anim.animation = a_name
+			anim.play()
+		return
+			
+	
 	var prefix = "idle_"
 	if move: prefix="move_"
 	var a_name=""
 	
-	var suffix=""
+	var suffix="down"
 	
 	if dir.x > 0:
 		suffix="right"
@@ -58,9 +120,17 @@ func animate(dir: Vector2, move = false, setanim = false):
 		suffix="up"
 	elif dir.y > 0.35:
 		suffix="down"
-
+	
 	a_name = prefix+suffix
 		
 	if setanim:
 		anim.animation = a_name
 		anim.play()
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_PREDELETE:
+			on_predelete()
+
+func on_predelete():
+	pass

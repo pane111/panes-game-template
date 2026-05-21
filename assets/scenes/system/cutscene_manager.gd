@@ -33,7 +33,7 @@ func entity_action(e_name,action,args:Array=[]):
 	var target_entity = entities[e_name]
 	if target_entity == null: printerr("Entity"+ e_name + "does not exist!");return
 	if target_entity.has_method(action):
-		return target_entity.callv(action,args)
+		return await target_entity.callv(action,args)
 	else:
 		printerr("Target entity" + e_name + "does not have the action " + action + "!")
 
