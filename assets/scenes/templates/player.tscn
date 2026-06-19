@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cnfxxcrmvhma2" path="res://assets/scenes/templates/player.gd" id="1_pp8k8"]
 [ext_resource type="Texture2D" uid="uid://yfuitudrnlop" path="res://assets/sprites/placeholder/npc_template.png" id="2_y5bjp"]
+[ext_resource type="Texture2D" uid="uid://dl3tir3wtkxct" path="res://assets/sprites/placeholder/shadow.png" id="3_y5bjp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8bh6m"]
 atlas = ExtResource("2_y5bjp")
@@ -73,7 +74,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8bh6m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_down",
 "speed": 5.0
 }, {
@@ -81,7 +82,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pp8k8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_left",
 "speed": 5.0
 }, {
@@ -89,7 +90,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y5bjp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_right",
 "speed": 5.0
 }, {
@@ -97,7 +98,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dklma")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_up",
 "speed": 5.0
 }, {
@@ -114,7 +115,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vxr81")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_down",
 "speed": 8.0
 }, {
@@ -131,7 +132,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n8gf0")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_left",
 "speed": 8.0
 }, {
@@ -148,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c2yk4")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_right",
 "speed": 8.0
 }, {
@@ -165,12 +166,14 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o2617")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move_up",
 "speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp8k8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8c8n"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1861052517 node_paths=PackedStringArray("anim")]
 y_sort_enabled = true
@@ -192,6 +195,14 @@ shape = SubResource("CapsuleShape2D_pp8k8")
 
 [node name="CameraPivot" type="Node2D" parent="." unique_id=1297058176]
 
-[node name="InteractionCast" type="RayCast2D" parent="." unique_id=1991045129]
+[node name="InteractionCast" type="ShapeCast2D" parent="." unique_id=680699551]
+visible = false
+shape = SubResource("RectangleShape2D_h8c8n")
 target_position = Vector2(0, 32)
+max_results = 1
 collision_mask = 8
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=303440709]
+z_index = -1
+position = Vector2(0, 18)
+texture = ExtResource("3_y5bjp")

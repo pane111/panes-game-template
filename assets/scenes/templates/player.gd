@@ -59,8 +59,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 	
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	if icast.is_colliding():
-		var col = icast.get_collider()
+	if icast.is_colliding() && handle_input:
+		var col = icast.get_collider(0)
 		if col == null: return
 		if col.is_in_group("interactable"):
 			can_inter=true
