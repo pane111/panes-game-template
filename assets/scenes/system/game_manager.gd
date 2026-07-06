@@ -5,6 +5,7 @@ extends Node
 var cur_scene #This is the currently loaded scene. For example, the title screen or whatever level is currently active
 @onready var maincam = $MainCam
 var is_loading_scene=false
+var lscene=""
 func _ready() -> void:
 	load_config()
 	player.hide()
@@ -72,20 +73,34 @@ func load_config():
 	print_debug("Loaded configurations")
 
 func save_data(file_num: int):
-	var save_file = FileAccess.open("user//:savegame"+str(file_num)+".sav",FileAccess.WRITE)
-	var sf_temp = SaveFileTemplate.new()
-	sf_temp.flags = FlagManager.flags
-	var json_file = JSON.stringify(sf_temp)
-	save_file.store_string(json_file)
+	var save_file = FileAccess.open("user://savegame"+str(file_num)+".sav",FileAccess.WRITE)
+	var saved_data = {
+		"flags":FlagManager.flags,
+		"lastscene":lscene
+	}
+	var json_file = JSON.stringify(saved_data)
+	if json_file != null:
+		save_file.store_string(json_file)
+	else:
+		print_debug("Error with JSON string")
 	
 	save_file.close()
 
 func load_data(file_num: int):
-	if not FileAccess.file_exists("user//:savegame"+str(file_num)+".sav"):
+	if not FileAccess.file_exists("user://savegame"+str(file_num)+".sav"):
 		print_debug("Invalid savegame name!")
 		return
 		
-	var save_file = FileAccess.open("user//:savegame"+str(file_num)+".sav",FileAccess.READ)
-	var sf_temp = JSON.parse_string(save_file.get_as_text()).data
-	print_debug(str(sf_temp))
+	var save_file = FileAccess.open("user://savegame"+str(file_num)+".sav",FileAccess.READ)
+	var sf_temp = JSON.parse_string(save_file.get_as_text())
+	if sf_temp is Dictionary:
+		FlagManager.reset_all_flags()
+		var lflags = sf_temp.get("flags",{})
+		for key in lflags:
+			FlagManager.flags[key] = lflags[key]
+		lscene = sf_temp["lastscene"]
+		load_new_scene(lscene,"shrine")
+		print_debug(str(sf_temp))
+	else:
+		print_debug("Save data could not be parsed")
 	save_file.close()
