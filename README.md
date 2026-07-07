@@ -6,7 +6,7 @@ Features include:
 - NPCs with different movement patterns
 - Interactables
 - Autoloads with functions like moving specific entities through commands or spawning objects
-- A resource file type for characters, making it easy to set them up for dialogue (which is part of a plugin, so you can also use only that)
+- A resource file type for characters, making it easy to set them up for dialogue
 - Scene transitioning
 - Saving/Loading data
 - Audio settings menu
