@@ -35,8 +35,8 @@ AudioManager="*uid://c8m70ejvv2mx6"
 
 [display]
 
-window/size/viewport_width=427
-window/size/viewport_height=240
+window/size/viewport_width=854
+window/size/viewport_height=480
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 

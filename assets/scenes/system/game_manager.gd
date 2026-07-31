@@ -6,6 +6,7 @@ var cur_scene #This is the currently loaded scene. For example, the title screen
 @onready var maincam = $MainCam
 var is_loading_scene=false
 var lscene=""
+
 func _ready() -> void:
 	load_config()
 	player.hide()
