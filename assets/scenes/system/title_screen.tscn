@@ -20,41 +20,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8rs7a")
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel" unique_id=899985788]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -143.5
-offset_top = -33.5
-offset_right = 143.5
-offset_bottom = 33.5
+anchors_preset = -1
+anchor_top = 0.23333333
+anchor_right = 1.0
+anchor_bottom = 0.76666665
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel/VBoxContainer" unique_id=1594916316]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 48
-theme_override_font_sizes/bold_font_size = 48
 bbcode_enabled = true
 text = "[wave]Pane11's Game Template!"
 fit_content = true
 scroll_active = false
-autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="PlayBtn" type="Button" parent="CanvasLayer/Panel/VBoxContainer" unique_id=91843066]
+custom_minimum_size = Vector2(128, 0)
+custom_maximum_size = Vector2(128, -1)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Start Game"
 
 [node name="SettingsBtn" type="Button" parent="CanvasLayer/Panel/VBoxContainer" unique_id=1176011271]
+custom_minimum_size = Vector2(128, 0)
+custom_maximum_size = Vector2(128, -1)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Settings"
 
 [node name="QuitBtn" type="Button" parent="CanvasLayer/Panel/VBoxContainer" unique_id=87936730]
+custom_minimum_size = Vector2(128, 0)
+custom_maximum_size = Vector2(128, -1)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Quit"
 
 [connection signal="pressed" from="CanvasLayer/Panel/VBoxContainer/PlayBtn" to="." method="_on_play_btn_pressed"]

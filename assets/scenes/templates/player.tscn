@@ -172,6 +172,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pp8k8"]
+radius = 8.0
+height = 18.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8c8n"]
 
@@ -191,6 +193,7 @@ animation = &"move_up"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2104374032]
+position = Vector2(0, 11)
 shape = SubResource("CapsuleShape2D_pp8k8")
 
 [node name="CameraPivot" type="Node2D" parent="." unique_id=1297058176]

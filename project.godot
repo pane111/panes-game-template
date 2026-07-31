@@ -35,7 +35,10 @@ AudioManager="*uid://c8m70ejvv2mx6"
 
 [display]
 
+window/size/viewport_width=427
+window/size/viewport_height=240
 window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
@@ -93,6 +96,7 @@ sprint={
 
 [physics]
 
+common/physics_jitter_fix=2.0
 common/physics_interpolation=true
 
 [rendering]
