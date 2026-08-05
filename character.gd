@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var anim: AnimatedSprite2D
 @export var moving=false
 @export var can_move=true
+@export var register_to_cs=false
+@export var register_name=""
 signal jumped
 signal move_completed
 var lastdir = Vector2.ZERO
@@ -16,7 +18,9 @@ var lastdir = Vector2.ZERO
 func _physics_process(_delta: float) -> void:
 	if moving:
 		move_and_slide()
-
+func _enter_tree() -> void:
+	if register_to_cs:
+		CutsceneManager.register_entity(register_name,self)
 #Move character for a specific amount of time in a direction
 func move_char(dir,duration,speed_mult=1.0,forced=false):
 	if !forced:
@@ -89,7 +93,7 @@ func jump(dur=0.25,height=32.0):
 	jumped.emit()
 
 #Set movement/idle animation
-func animate(dir: Vector2, move = false, setanim = false):
+func animate(dir: Vector2, move = false, setanim = false,force_repeat=false):
 	
 	if simplified_animation:
 		var a_name="idle"
@@ -111,21 +115,17 @@ func animate(dir: Vector2, move = false, setanim = false):
 	
 	var suffix="down"
 	
-	if dir.x > 0:
-		suffix="right"
-	elif dir.x < 0:
-		suffix="left"
-		
-	if dir.y < -0.35:
-		suffix="up"
-	elif dir.y > 0.35:
-		suffix="down"
+	if abs(dir.x) > abs(dir.y):
+		suffix = "right" if dir.x > 0 else "left"
+	else:
+		suffix = "down" if dir.y > 0 else "up"
+	
 	
 	a_name = prefix+suffix
 		
 	if setanim:
-		anim.animation = a_name
-		anim.play()
+		if anim.animation != a_name or force_repeat:
+			anim.play(a_name)
 
 func _notification(what: int) -> void:
 	match what:
@@ -133,4 +133,5 @@ func _notification(what: int) -> void:
 			on_predelete()
 
 func on_predelete():
-	pass
+	if register_to_cs:
+		CutsceneManager.entities.erase(register_name)

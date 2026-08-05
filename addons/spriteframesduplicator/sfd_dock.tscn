@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b5as72surwidj"]
+
+[ext_resource type="Script" uid="uid://v1qahi5v3c4" path="res://addons/spriteframesduplicator/sfd_dock.gd" id="1_ascc3"]
+
+[node name="SFDDock" type="VBoxContainer" unique_id=1179701633]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ascc3")
+
+[node name="Label" type="Label" parent="." unique_id=1942216888]
+layout_mode = 2
+text = "SpriteFrames"
+
+[node name="SFSelector" type="EditorResourcePicker" parent="." unique_id=264137404]
+layout_mode = 2
+base_type = "SpriteFrames"
+
+[node name="Label2" type="Label" parent="." unique_id=578679469]
+layout_mode = 2
+text = "Texture2D"
+
+[node name="TexSelector" type="EditorResourcePicker" parent="." unique_id=799460937]
+layout_mode = 2
+base_type = "Texture2D"
+
+[node name="Export" type="Button" parent="." unique_id=228938030]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Export"
+
+[node name="DebugLabel" type="Label" parent="." unique_id=107190225]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 128)
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+text = "DEBUG"
+
+[connection signal="resource_changed" from="SFSelector" to="." method="_on_sf_selector_resource_changed"]
+[connection signal="resource_changed" from="TexSelector" to="." method="_on_tex_selector_resource_changed"]
+[connection signal="pressed" from="Export" to="." method="_on_export_pressed"]
