@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c02wjjixvby61"]
+
+[ext_resource type="Script" uid="uid://w5b1om4uy5pr" path="res://assets/scenes/areas/samples/interact_load.gd" id="1_nwo0y"]
+[ext_resource type="Texture2D" uid="uid://b6602i6crtgr6" path="res://assets/sprites/system/load_zone.png" id="2_77f11"]
+[ext_resource type="AudioStream" uid="uid://bl2bpi3ic6fh3" path="res://assets/audio/sfx/door.wav" id="3_77f11"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_72v2h"]
+radius = 8.0
+
+[node name="InteractLoad" type="StaticBody2D" unique_id=1775226372 groups=["interactable"]]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_nwo0y")
+area = "uid://cui4yiwmknhwn"
+direction = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2055855274]
+shape = SubResource("CircleShape2D_72v2h")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=242390735]
+z_index = 5
+texture = ExtResource("2_77f11")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=753086188]
+stream = ExtResource("3_77f11")
+bus = &"SFX"

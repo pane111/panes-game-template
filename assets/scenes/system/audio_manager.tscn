@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bdnh0b5b331um" path="res://assets/audio/sfx/select.wav" id="4_kn4u0"]
 
 [node name="AudioManager" type="Node" unique_id=2050948673]
+process_mode = 3
 script = ExtResource("1_eleqn")
 global_ui_accept_sound = ExtResource("2_e0ajw")
 global_ui_cancel_sound = ExtResource("3_hgx21")

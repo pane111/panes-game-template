@@ -131,7 +131,8 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_PREDELETE:
 			on_predelete()
-
+func force_update_anim():
+	animate(lastdir,moving,true,true)
 func on_predelete():
 	if register_to_cs:
 		CutsceneManager.entities.erase(register_name)

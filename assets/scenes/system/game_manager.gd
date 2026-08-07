@@ -6,7 +6,7 @@ var cur_scene #This is the currently loaded scene. For example, the title screen
 @onready var maincam = $MainCam
 var is_loading_scene=false
 var lscene=""
-
+signal loading_finished
 func _ready() -> void:
 	load_config()
 	player.hide()
@@ -15,25 +15,39 @@ func _ready() -> void:
 	CutsceneManager.register_entity("player",player)
 
 
-func load_new_scene(scene_path,door=null,transition=true,has_player=true):
+func load_new_scene(scene_path,door=null,transition=true,has_player=true,player_direction=player.lastdir,dirtrans=false):
 	if is_loading_scene: return
 	is_loading_scene=true
-	
+	player.process_mode=Node.PROCESS_MODE_DISABLED
 	if transition:
-		HudManager.fade_to_black()
+		if dirtrans:
+			HudManager.fade_black_dir(-player_direction)
+		else:
+			HudManager.fade_to_black()
 		await HudManager.fade_midpoint
+		maincam.position_smoothing_enabled=false
+	
+	
 	player.reparent(self)
+	
 	cur_scene.queue_free()
 	var new_scene = load(scene_path).instantiate()
 	add_sibling(new_scene)
 	cur_scene=new_scene
 	await get_tree().process_frame
 	if transition:
-		HudManager.fade_black_out()
+		if dirtrans:
+			HudManager.fade_black_out_dir(player_direction)
+		else:
+			HudManager.fade_black_out()
 	if has_player:
-		player.process_mode = Node.PROCESS_MODE_ALWAYS
+		player.process_mode = Node.PROCESS_MODE_PAUSABLE
+		player.moving=false
+		player.lastdir = player_direction
+		player.force_update_anim()
 		player.show()
 		maincam.reparent(player.cam_pivot)
+		
 		player.reparent(cur_scene)
 		player.cam_pivot.position = Vector2.ZERO
 		maincam.position=Vector2.ZERO
@@ -46,10 +60,14 @@ func load_new_scene(scene_path,door=null,transition=true,has_player=true):
 				player.global_position = cur_scene.doors[door].global_position
 			else:
 				printerr("Door "+door+ " was null!")
+		if transition:
+			await HudManager.fade_ended
+			maincam.position_smoothing_enabled=true
 	else:
 		maincam.reparent(self)
 		maincam.position = Vector2.ZERO
 	is_loading_scene=false
+	loading_finished.emit()
 
 func save_config():
 	var config = ConfigFile.new()
@@ -61,6 +79,10 @@ func save_config():
 	print_debug("Saved configurations")
 
 func load_config():
+	AudioServer.set_bus_volume_linear(0,0.25)
+	AudioServer.set_bus_volume_linear(1,0.25)
+	AudioServer.set_bus_volume_linear(2,0.25)
+	
 	var config = ConfigFile.new()
 	var err = config.load("user://config.cfg")
 	

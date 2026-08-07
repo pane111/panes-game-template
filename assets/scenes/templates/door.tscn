@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cgr8rpqxqrw2y"]
+
+[ext_resource type="Texture2D" uid="uid://djqiebmji2cp6" path="res://assets/sprites/system/door.png" id="1_6qsxb"]
+[ext_resource type="Script" uid="uid://dqr6wpems7dod" path="res://assets/scenes/areas/samples/door.gd" id="2_rjabc"]
+
+[node name="Door" type="Sprite2D" unique_id=551077920]
+z_index = 3
+texture = ExtResource("1_6qsxb")
+script = ExtResource("2_rjabc")

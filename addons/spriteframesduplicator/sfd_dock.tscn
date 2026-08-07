@@ -20,9 +20,21 @@ base_type = "SpriteFrames"
 
 [node name="Label2" type="Label" parent="." unique_id=578679469]
 layout_mode = 2
-text = "Texture2D"
+text = "New Sprite Sheet"
 
 [node name="TexSelector" type="EditorResourcePicker" parent="." unique_id=799460937]
+layout_mode = 2
+base_type = "Texture2D"
+
+[node name="CheckButton" type="CheckButton" parent="." unique_id=1572269118]
+layout_mode = 2
+text = "Rescale"
+
+[node name="Label3" type="Label" parent="." unique_id=1645060366]
+layout_mode = 2
+text = "Old Sprite Sheet"
+
+[node name="OldSheetSelector" type="EditorResourcePicker" parent="." unique_id=131169234]
 layout_mode = 2
 base_type = "Texture2D"
 
@@ -40,4 +52,5 @@ text = "DEBUG"
 
 [connection signal="resource_changed" from="SFSelector" to="." method="_on_sf_selector_resource_changed"]
 [connection signal="resource_changed" from="TexSelector" to="." method="_on_tex_selector_resource_changed"]
+[connection signal="resource_changed" from="OldSheetSelector" to="." method="_on_old_sheet_selector_resource_changed"]
 [connection signal="pressed" from="Export" to="." method="_on_export_pressed"]

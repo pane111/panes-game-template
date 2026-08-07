@@ -3,6 +3,7 @@ extends Control
 
 var sf: SpriteFrames
 var sheet: Texture2D
+var oldsheet: Texture2D
 var file_dialog: EditorFileDialog
 	
 func _ready() -> void:
@@ -21,6 +22,12 @@ func _on_sf_selector_resource_changed(resource: Resource) -> void:
 
 func duplicate_sf():
 	if sf == null or sheet == null: return
+	
+	var scale_factor = Vector2(1.0,1.0)
+	if $CheckButton.button_pressed and oldsheet != null:
+		scale_factor = sheet.get_size() / oldsheet.get_size()
+		print_debug("Scale factor: " + str(scale_factor))
+	
 	var new_sf = sf.duplicate(true)
 	for anim_name in new_sf.get_animation_names():
 		for i in range(new_sf.get_frame_count(anim_name)):
@@ -30,6 +37,8 @@ func duplicate_sf():
 			if frame_tex is AtlasTexture:
 				var new_atlas = frame_tex.duplicate(true) as AtlasTexture
 				new_atlas.atlas = sheet
+				new_atlas.region.position*=scale_factor
+				new_atlas.region.size *= scale_factor
 				new_sf.set_frame(anim_name, i, new_atlas, frame_duration)
 			
 	file_dialog.set_meta("pending_sf", new_sf)
@@ -47,3 +56,7 @@ func _on_file_selected(path: String)-> void:
 			print("Exported SpriteFrames successfully!")
 		else:
 			print("Error exporting SpriteFrames!")
+
+
+func _on_old_sheet_selector_resource_changed(resource: Resource) -> void:
+	oldsheet = resource as Texture2D

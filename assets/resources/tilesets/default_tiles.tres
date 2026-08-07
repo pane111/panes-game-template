@@ -153,6 +153,22 @@ texture = ExtResource("1_q30pq")
 2:4/0 = 0
 2:4/0/texture_origin = Vector2i(0, 8)
 2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 8, -4, 8)
+6:3/size_in_atlas = Vector2i(1, 2)
+6:3/0 = 0
+6:3/0/texture_origin = Vector2i(0, -8)
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:3/size_in_atlas = Vector2i(1, 2)
+7:3/0 = 0
+7:3/0/texture_origin = Vector2i(0, -8)
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:5/size_in_atlas = Vector2i(1, 2)
+6:5/0 = 0
+6:5/0/texture_origin = Vector2i(0, -8)
+6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 24, -8, 24)
+7:5/size_in_atlas = Vector2i(1, 2)
+7:5/0 = 0
+7:5/0/texture_origin = Vector2i(0, -8)
+7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 24, -8, 24)
 
 [resource]
 physics_layer_0/collision_layer = 128

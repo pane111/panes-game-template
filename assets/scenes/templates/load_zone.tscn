@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://by1rvuysq6ht2"]
+
+[ext_resource type="Texture2D" uid="uid://b6602i6crtgr6" path="res://assets/sprites/system/load_zone.png" id="1_1uaxv"]
+[ext_resource type="Script" uid="uid://chc0ibbgvrw5w" path="res://assets/scenes/templates/load_zone.gd" id="1_vtsd7"]
+[ext_resource type="AudioStream" uid="uid://bwhq025l2gfcc" path="res://assets/audio/sfx/area_change.wav" id="3_656e8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8c8n"]
+
+[node name="LoadZone" type="Area2D" unique_id=1609994003]
+script = ExtResource("1_vtsd7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809947564]
+shape = SubResource("RectangleShape2D_h8c8n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2064245214]
+z_index = 5
+texture = ExtResource("1_1uaxv")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=694592092]
+stream = ExtResource("3_656e8")
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

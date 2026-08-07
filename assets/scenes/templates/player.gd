@@ -28,9 +28,11 @@ func _ready() -> void:
 	#DialogueManager.dialogue_ended.connect(func(_info = null): set_collision(true))
 
 func _process(delta: float) -> void:
-	if velocity.length() > 0:
+	if moving:
 		cam_pivot.position = lerp(cam_pivot.position,Vector2.ZERO+velocity.normalized()*max_cam_offset,cam_speed*delta)
 
+func reset_cam_pivot():
+	cam_pivot.position = Vector2.ZERO
 func _unhandled_input(_event: InputEvent) -> void:
 	if !handle_input:
 		return
@@ -70,3 +72,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		can_inter=false
 	#global_position = global_position.clamp(Vector2.ZERO,Vector2(99999,99999))
+
+
+func _on_c_sprite_frame_changed() -> void:
+	if moving and anim.frame% 2 != 0:
+		$Footstep.play()

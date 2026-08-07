@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://csqyyca6875fq"]
 
 [ext_resource type="Script" uid="uid://c3aavisk576al" path="res://assets/scenes/system/title_screen.gd" id="1_bivv5"]
-[ext_resource type="AudioStream" uid="uid://jerc7x35kqiu" path="res://assets/audio/music/MyCoolSong.ogg" id="2_8rs7a"]
+[ext_resource type="AudioStream" uid="uid://cje2jb5y85via" path="res://assets/audio/music/happy.ogg" id="2_8rs7a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rs7a"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="TitleScreen" type="Node" unique_id=2143059936]
+process_mode = 3
 script = ExtResource("1_bivv5")
 starter_scene = "uid://hjmmpw48omox"
 title_music = ExtResource("2_8rs7a")
@@ -41,6 +42,7 @@ scroll_active = false
 horizontal_alignment = 1
 
 [node name="PlayBtn" type="Button" parent="CanvasLayer/Panel/VBoxContainer" unique_id=91843066]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 custom_maximum_size = Vector2(128, -1)
 layout_mode = 2

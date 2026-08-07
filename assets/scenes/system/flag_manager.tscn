@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://cgmeniq5klsgf" path="res://assets/scenes/system/flag_manager.gd" id="1_yy2vb"]
 
 [node name="FlagManager" type="Node" unique_id=1901601235]
+process_mode = 3
 script = ExtResource("1_yy2vb")

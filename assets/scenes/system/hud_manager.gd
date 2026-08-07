@@ -24,6 +24,18 @@ func fade_black_out():
 	await $Overlays/FadeBlackAnim.animation_finished
 	fade_ended.emit()
 
+func fade_black_dir(dir: Vector2):
+	%DirectionalFade.material.set_shader_parameter("direction",dir)
+	$Overlays/FadeBlackAnim.play("fade_black_directional")
+	await get_tree().create_timer(0.5).timeout
+	fade_midpoint.emit()
+
+func fade_black_out_dir(dir: Vector2):
+	%DirectionalFade.material.set_shader_parameter("direction",dir)
+	$Overlays/FadeBlackAnim.play_backwards("fade_black_directional")
+	await $Overlays/FadeBlackAnim.animation_finished
+	fade_ended.emit()
+
 func set_settings(val):
 	if val:
 		$PopupMenus/SettingsMenu.show()

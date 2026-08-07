@@ -1,0 +1,10 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://br3lj2dhq1ji1"]
+
+[ext_resource type="AudioStream" uid="uid://ba1kham07hicb" path="res://assets/audio/sfx/step.wav" id="1_mjvdw"]
+
+[resource]
+playback_mode = 1
+random_pitch = 1.0594631
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("1_mjvdw")
