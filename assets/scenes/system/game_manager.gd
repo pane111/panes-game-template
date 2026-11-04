@@ -14,6 +14,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 	CutsceneManager.register_entity("player",player)
 
+func start_dialogue(dialogue_file,start_point="start",extra=[]):
+	print_debug("started dialogue!")
 
 func load_new_scene(scene_path,door=null,transition=true,has_player=true,player_direction=player.lastdir,dirtrans=false):
 	if is_loading_scene: return

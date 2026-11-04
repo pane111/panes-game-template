@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var can_move=true
 @export var register_to_cs=false
 @export var register_name=""
+@export var actor_name=""
 signal jumped
 signal move_completed
 var lastdir = Vector2.ZERO
@@ -21,6 +22,8 @@ func _physics_process(_delta: float) -> void:
 func _enter_tree() -> void:
 	if register_to_cs:
 		CutsceneManager.register_entity(register_name,self)
+	if actor_name!="":
+		GameManager.cur_scene.actors[actor_name]=self
 #Move character for a specific amount of time in a direction
 func move_char(dir,duration,speed_mult=1.0,forced=false):
 	if !forced:

@@ -6,6 +6,8 @@ extends Node2D
 @export var doors: Dictionary[String,Node2D] #Basically all places where the player can enter/exit the scene
 @export var default_door: String = "default" #If no door is provided when loading a scene, it will use this one
 
+@export var actors: Dictionary[String,Node]
+
 func _ready() -> void:
 	AudioManager.fade_music_out()
 	await AudioManager.fade_complete
